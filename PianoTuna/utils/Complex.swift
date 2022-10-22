@@ -58,10 +58,15 @@ extension Complex {
     public var radius: Double { return sqrt(radiusSquare) }
     public var arg: Double { return atan2(y, x) }
     
-    public var hashValue: Int {
-        return x.hashValue &+ y.hashValue
-    }
+    //public var hashValue: Int {
+    //    return x.hashValue &+ y.hashValue
+    //}
     
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(x.hashValue)
+        hasher.combine(y.hashValue)
+    }
+        
     public var description: String {
         if x != 0 {
             if y > 0 {
@@ -83,50 +88,50 @@ extension Complex {
 }
 
 public extension Complex {
-    public static func ==(lhs: Complex, rhs: Complex) -> Bool {
+    static func ==(lhs: Complex, rhs: Complex) -> Bool {
         return lhs.x == rhs.x && lhs.y == rhs.y
     }
     
-    public func conjugate() -> Complex {
+    func conjugate() -> Complex {
         return Complex(x, -y)
     }
     
     
-    public func add(_ n: Complex) -> Complex {
+    func add(_ n: Complex) -> Complex {
         return Complex(x + n.x, y + n.y)
     }
     
     
-    public func subtract(_ n: Complex) -> Complex {
+    func subtract(_ n: Complex) -> Complex {
         return Complex(x - n.x, y - n.y)
     }
     
     
-    public func multiply(_ n: Double) -> Complex {
+    func multiply(_ n: Double) -> Complex {
         return Complex(x * n, y * n)
     }
     
     
-    public func multiply(_ n: Complex) -> Complex {
+    func multiply(_ n: Complex) -> Complex {
         return Complex(x * n.x - y * n.y, x * n.y + y * n.x)
     }
     
     
-    public func divide(_ n: Complex) -> Complex {
+    func divide(_ n: Complex) -> Complex {
         return self.multiply((n.conjugate().divide(n.radiusSquare)))
     }
     
-    public func divide(_ n: Double) -> Complex {
+    func divide(_ n: Double) -> Complex {
         return Complex(x / n, y / n)
     }
     
     
-    public func power(_ n: Double) -> Complex {
+    func power(_ n: Double) -> Complex {
         return pow(radiusSquare, n / 2) * Complex(cos(n * arg), sin(n * arg))
     }
     
     
-    public func power(_ n: Int) -> Complex {
+    func power(_ n: Int) -> Complex {
         switch n {
         case 0: return 1
         case 1: return self
@@ -137,38 +142,38 @@ public extension Complex {
         }
     }
     
-    public func magnitude() -> Double {
+    func magnitude() -> Double {
         return sqrt(x*x + y*y)
     }
     
-    public mutating func conjugateInPlace() {
+    mutating func conjugateInPlace() {
         y = -y
     }
     
-    public mutating func addInPlace(_ n: Complex) {
+    mutating func addInPlace(_ n: Complex) {
         x += n.x
         y += n.y
     }
     
-    public mutating func subtractInPlace(_ n: Complex) {
+    mutating func subtractInPlace(_ n: Complex) {
         x -= n.x
         y -= n.y
     }
     
-    public mutating func multiplyInPlace(_ n: Double) {
+    mutating func multiplyInPlace(_ n: Double) {
         x *= n
         y *= n
     }
     
-    public mutating func multiplyInPlace(_ n: Complex) {
+    mutating func multiplyInPlace(_ n: Complex) {
         self = self.multiply(n)
     }
     
-    public mutating func divideInPlace(_ n: Complex) {
+    mutating func divideInPlace(_ n: Complex) {
         self = self.divide(n)
     }
     
-    public mutating func divideInPlace(_ n: Double) {
+    mutating func divideInPlace(_ n: Double) {
         x /= n
         y /= n
     }

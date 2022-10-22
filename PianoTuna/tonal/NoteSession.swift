@@ -39,7 +39,7 @@ class NoteSession {
     var overallMagnitudeLong = MovingAverage(numberOfSamples:8)
     var overallMagnitudeHit: Double!
 
-    var detectedNote: (name: String, cents: Double, noteFrequency: Double, noteNumber: Int, realFrequency: Double)!
+    var detectedNote: (name: String, cents: Double, noteNumber: Int, noteFrequency: Double, realFrequency: Double)!
     
     var zoomedSpectrum: MovingAverageBins!
     var zoomedTonalPeaks: [(frequency:Double, magnitude: Double)]!
@@ -115,7 +115,7 @@ class NoteSession {
                         
                     } else {
                         self.detectedNote = NoteIntervalCalculator.frequencyToNoteEqualTemperament(bestPeaks[0].frequency)
-                        print("LOCKING TO \(self.detectedNote)")
+                        print("LOCKING TO \(String(describing: self.detectedNote))")
                         
                         let diff = NoteIntervalCalculator.frequencyFromCents(baseFrequency: self.detectedNote.realFrequency, cents: self.zoomCents) - self.detectedNote.realFrequency
                         self.zoomFrequencyFrom = max(0, self.detectedNote.noteFrequency - diff)
@@ -140,7 +140,7 @@ class NoteSession {
             zoomedSpectrum.addSample(bins: spec)
             
             if fft.sumMagnitudes(lowFreq: self.zoomFrequencyFrom, highFreq: self.zoomFrequencyTo, useDB: false) < 0.1 {
-                print("SIGNAL TOO LOW \(overallMagnitudeHit)")
+                print("SIGNAL TOO LOW \(String(describing: overallMagnitudeHit))")
                 startPhase(phase: NoteSessionPhase.release, fft: fft)
 
             } else {

@@ -46,7 +46,7 @@ class NoteIntervalCalculator {
         noteNumber = noteNumber + (12*Int(oct))
 //        print("NOTE \(noteNumber) \(oct)")
         let noteFrequency = frequencyForNoteEqualTemperament(noteNumber: noteNumber)
-        return ( name: "\(note)\(Int(oct))".replacingOccurrences(of: " ", with: ""), cents: cents, noteFrequency: noteFrequency, noteNumber: noteNumber, realFrequency: freq )
+        return ( name: "\(note)\(Int(oct))".replacingOccurrences(of: " ", with: ""), cents: cents, noteNumber: noteNumber, noteFrequency: noteFrequency, realFrequency: freq )
     }
     
     private static func charAt(_ str:String, _ i:Int) -> Character {

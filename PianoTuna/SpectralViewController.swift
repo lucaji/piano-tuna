@@ -199,10 +199,10 @@ class SpectralViewController: UIViewController {
                 annotations.append((text: "Fundamental \(noteSession.detectedNote.name)Hz - [\(noteSession.detectedNote.name) \(noteSession.detectedNote.noteNumber) \(noteSession.detectedNote.noteFrequency)Hz]", x: 100, y: 40))
             }
             if noteSession.zoomedTonalPeaks != nil {
-                annotations.append((text: "Current frequencies \(noteSession.zoomedTonalPeaks)", x: 100, y: 55))
+                annotations.append((text: "Current frequencies \(String(describing: noteSession.zoomedTonalPeaks))", x: 100, y: 55))
                 var c = 0
                 for peak in noteSession.zoomedTonalPeaks {
-                    labelFrequencies.append((frequency: peak.frequency, text: "^", y: 20))
+                    labelFrequencies.append((text: "^", frequency: peak.frequency, y: 20))
                     let note = NoteIntervalCalculator.frequencyToNoteEqualTemperament(peak.frequency)
                     annotations.append((text: "\(note.name) \(noteSession.detectedNote.noteNumber) \(String(format:"%.2f",note.cents))c \(String(format:"%.2f",peak.frequency))Hz (\(noteSession.detectedNote.noteFrequency))Hz", x: 100, y: 70 + Float(c)))
                     c = c + 15
@@ -214,7 +214,7 @@ class SpectralViewController: UIViewController {
             self.fftSpectrumView.annotations = annotations
             self.fftSpectrumView.annotationsFrequency = labelFrequencies
             
-            //        print("zoomFrequencyFrom \(noteSession.zoomFrequencyFrom) zoomFrequencyTo \(noteSession.zoomFrequencyTo)")
+            // print("zoomFrequencyFrom \(noteSession.zoomFrequencyFrom) zoomFrequencyTo \(noteSession.zoomFrequencyTo)")
             
             self.fftSpectrumView.zoomFromFrequency = noteSession.zoomFrequencyFrom
             self.fftSpectrumView.zoomToFrequency = noteSession.zoomFrequencyTo
@@ -225,7 +225,7 @@ class SpectralViewController: UIViewController {
             if noteSession.zoomedTonalPeaks != nil && noteSession.zoomedTonalPeaks!.count>0 {
                 let peak = noteSession.zoomedTonalPeaks[0]
                 let note = NoteIntervalCalculator.frequencyToNoteEqualTemperament(peak.frequency)
-//                print("detection=\(note.name) \(String(format: "%.1f", note.cents))¢ \(peak.frequency)Hz")
+// print("detection=\(note.name) \(String(format: "%.1f", note.cents))¢ \(peak.frequency)Hz")
                 self.spectrumView2.annotations.append((text:"\(note.name) \(String(format: "%.1f", note.cents))¢", x:100, y:10))
     
                 let harmonics = Inharmonicity.calculateInharmonicity(fft: noteSession.fft, fundamentalFrequency: peak.frequency)
@@ -245,13 +245,13 @@ class SpectralViewController: UIViewController {
                 let wss = self.waveletSearches.sorted(by: { (elem1, elem2) -> Bool in
                     return abs(elem1.level) > abs(elem2.level)
                 })
-//                for ws in wss {
-//                    self.spectrumView2.annotations.append((text:"\(String(format:"%.3f",ws.frequency))Hz=> \(String(format:"%.4f", ws.level)) \(String(format:"%.3f", ws.measuredFrequency)) err=\((avgFreq != nil ? "\(avgFreq!-ws.frequency)" : "-"))Hz", x:100, y:60+Float(c)))
-//                    if c == 0 {
-////                        self.spectrumView2.data = ws.debug
-//                    }
-//                    c += 15
-//                }
+                // for ws in wss {
+                //     self.spectrumView2.annotations.append((text:"\(String(format:"%.3f",ws.frequency))Hz=> \(String(format:"%.4f", ws.level)) \(String(format:"%.3f", ws.measuredFrequency)) err=\((avgFreq != nil ? "\(avgFreq!-ws.frequency)" : "-"))Hz", x:100, y:60+Float(c)))
+                //      if c == 0 {
+                //           self.spectrumView2.data = ws.debug
+                //      }
+                //      c += 15
+                // }
                 if avgFreq != nil {
                     self.spectrumView2.annotations.append((text:"\(String(format:"%.4f",avgFreq!))Hz", x:100, y:60+Float(c)))
                     c += 15

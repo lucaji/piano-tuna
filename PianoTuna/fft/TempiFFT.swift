@@ -75,6 +75,9 @@ import Accelerate
     private var fftSetup:FFTSetup
     private var complexBuffer: DSPDoubleSplitComplex!
     
+    private var real:UnsafeMutablePointer<Double>
+    private var imaginary:UnsafeMutablePointer<Double>
+
     /// Instantiate the FFT.
     /// - Parameter withSize: The length of the sample buffer we'll be analyzing. Must be a power of 2. The resulting ```magnitudes``` are of length ```inSize/2```.
     /// - Parameter sampleRate: Sampling rate of the provided audio data.
@@ -96,9 +99,9 @@ import Accelerate
         self.fftSetup = vDSP_create_fftsetupD(UInt(log2Size), FFTRadix(FFT_RADIX2))!
         
         // Init the complexBuffer
-        var real = [Double](repeating: 0.0, count: self.halfSize)
-        var imaginary = [Double](repeating: 0.0, count: self.halfSize)
-        self.complexBuffer = DSPDoubleSplitComplex(realp: &real, imagp: &imaginary)
+        self.real = UnsafeMutablePointer<Double>.allocate(capacity: self.halfSize)
+        self.imaginary = UnsafeMutablePointer<Double>.allocate(capacity: self.halfSize)
+        self.complexBuffer = DSPDoubleSplitComplex(realp: self.real, imagp: self.imaginary)
     }
     
     deinit {
@@ -150,7 +153,8 @@ import Accelerate
                 imags.append(element)
             }
         }
-        self.complexBuffer = DSPDoubleSplitComplex(realp: UnsafeMutablePointer(mutating: reals), imagp: UnsafeMutablePointer(mutating: imags))
+        
+        self.complexBuffer = DSPDoubleSplitComplex(realp: self.real, imagp: self.imaginary)
         
         // This compiles without error but doesn't actually work. It results in garbage values being stored to the complexBuffer's real and imag parts. Why? The above workaround is undoubtedly tons slower so it would be good to get vDSP_ctoz working again.
 //        withUnsafePointer(to: &analysisBuffer, { $0.withMemoryRebound(to: DSPComplex.self, capacity: analysisBuffer.count) {
@@ -186,9 +190,9 @@ import Accelerate
     // On arrays of 1024 elements, this is ~35x faster than an iterational algorithm. Thanks Accelerate.framework!
     @inline(__always) func fastAverage(_ array:[Double], _ startIdx: Int, _ stopIdx: Int) -> Double {
         var mean: Double = 0
-        let ptr = UnsafePointer<Double>(array)
-        vDSP_meanvD(ptr + startIdx, 1, &mean, UInt(stopIdx - startIdx))
-        
+        array.withUnsafeBufferPointer { SPS in
+            vDSP_meanvD(SPS.baseAddress! + startIdx, 1, &mean, UInt(stopIdx - startIdx))
+        }
         return mean
     }
     
