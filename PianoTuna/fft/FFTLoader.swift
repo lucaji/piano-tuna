@@ -8,7 +8,8 @@
 
 import Foundation
 
-//This is the entrypoint for FFT analysis for input buffer accumulation and other tools over the resulting FFT matrix, like averaging and linear regression for better stability
+/// This is the entrypoint for FFT analysis for input buffer accumulation and other tools over the resulting FFT matrix,
+/// like averaging and linear regression for better stability
 class FFTLoader {
     
     var buffer: CircularArray<Double>!
@@ -26,7 +27,7 @@ class FFTLoader {
         self.samplesSize = samplesSize
         self.overlapRatio = overlapRatio
         self.buffer = CircularArray<Double>(maxSize: self.samplesSize)
-//        print("samplesSize \(self.samplesSize) \(samplesSize) \(overlapRatio)")
+        // print("samplesSize \(self.samplesSize) \(samplesSize) \(overlapRatio)")
     }
     
     func addSamples(samples: [Double]) -> TempiFFT! {
@@ -39,10 +40,10 @@ class FFTLoader {
                 })
                 let fft = TempiFFT(withSize: self.samplesSize, sampleRate: self.sampleRate)
                 fft.windowType = TempiFFTWindowType.gaussian
-//                print("buffer samples \(self.lastBufferSamples.count)")
+                // print("buffer samples \(self.lastBufferSamples.count)")
                 fft.fftForward(self.lastBufferSamples)
                 forwardFrequency.tick()
-//                self.buffer.removeAll(keepingCapacity: false)
+                // self.buffer.removeAll(keepingCapacity: false)
                 self.processedSamplesCount = 0
                 return fft
             }

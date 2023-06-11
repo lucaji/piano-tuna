@@ -43,7 +43,6 @@ class TempiAudioInput: NSObject {
     /// Start recording. Prompts for access to microphone if necessary.
     func startRecording() {
         do {
-            
             if self.audioUnit == nil {
                 setupAudioSession()
                 setupAudioUnit()

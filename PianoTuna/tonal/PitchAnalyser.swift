@@ -57,8 +57,8 @@ class PitchAnalyser {
     }
     
     static func calculateHPSSpectrum(spectrum: [Double], harmonics: Int=3) -> [Double] {
-        //using Harmonic Product Spectrum (HPS) for now
-        //more at https://cnx.org/contents/i5AAkZCP@2/Pitch-Detection-Algorithms
+        // using Harmonic Product Spectrum (HPS) for now
+        // more at https://cnx.org/contents/i5AAkZCP@2/Pitch-Detection-Algorithms
         
         let minIndex = 20
         

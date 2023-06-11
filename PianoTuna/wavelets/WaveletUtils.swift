@@ -18,7 +18,7 @@ class WaveletUtils {
     
     static func frequencyMatchLevel(signal: [Double], sampleRate: Double, frequency: Double) -> (frequency: Double, level: Double, measuredFrequency: Double, debug: [Double])! {
         
-//        let analysisPeriods = 10.0
+// let analysisPeriods = 10.0
         let morlet = Morlet(sampleRate:sampleRate, s: 1)
         
 //        let signalPeriods = floor(Double(signal.count)/wl)

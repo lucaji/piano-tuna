@@ -26,8 +26,6 @@
 		7CBE8CAE206343800081D69A /* FFTLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE8CAD206343800081D69A /* FFTLoader.swift */; };
 		7CBE8CB02063499D0081D69A /* LinearRegressionBins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE8CAF2063499D0081D69A /* LinearRegressionBins.swift */; };
 		7CCFE75520636C5E0017D2AD /* FrequencyMeasure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCFE75420636C5E0017D2AD /* FrequencyMeasure.swift */; };
-		7CCFE757206457150017D2AD /* Examples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCFE756206457150017D2AD /* Examples.swift */; };
-		7CCFE7592064642E0017D2AD /* MicInputExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCFE7582064642E0017D2AD /* MicInputExtractor.swift */; };
 		7CCFE75C206B5DF50017D2AD /* Morlet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCFE75B206B5DF50017D2AD /* Morlet.swift */; };
 		7CCFE75E206B5E020017D2AD /* WaveletUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCFE75D206B5E020017D2AD /* WaveletUtils.swift */; };
 		7CCFE760206BEDDB0017D2AD /* MathUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCFE75F206BEDDB0017D2AD /* MathUtils.swift */; };
@@ -60,8 +58,6 @@
 		7CBE8CAD206343800081D69A /* FFTLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFTLoader.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		7CBE8CAF2063499D0081D69A /* LinearRegressionBins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearRegressionBins.swift; sourceTree = "<group>"; };
 		7CCFE75420636C5E0017D2AD /* FrequencyMeasure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrequencyMeasure.swift; sourceTree = "<group>"; };
-		7CCFE756206457150017D2AD /* Examples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Examples.swift; sourceTree = "<group>"; };
-		7CCFE7582064642E0017D2AD /* MicInputExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicInputExtractor.swift; sourceTree = "<group>"; };
 		7CCFE75B206B5DF50017D2AD /* Morlet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Morlet.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		7CCFE75D206B5E020017D2AD /* WaveletUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveletUtils.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		7CCFE75F206BEDDB0017D2AD /* MathUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathUtils.swift; sourceTree = "<group>"; wrapsLines = 0; };
@@ -130,8 +126,6 @@
 				EFAC3F471C45C719002CD63F /* TempiFFT.swift */,
 				7C563012205C9C38003111CF /* ScaledBandsFFT.swift */,
 				7CBE8CAD206343800081D69A /* FFTLoader.swift */,
-				7CCFE756206457150017D2AD /* Examples.swift */,
-				7CCFE7582064642E0017D2AD /* MicInputExtractor.swift */,
 			);
 			path = fft;
 			sourceTree = "<group>";
@@ -269,7 +263,6 @@
 				7C51A76420589194006A9E1D /* CircularArray.swift in Sources */,
 				7CBE8CAC2063347C0081D69A /* LinearRegression.swift in Sources */,
 				7CBE8CB02063499D0081D69A /* LinearRegressionBins.swift in Sources */,
-				7CCFE757206457150017D2AD /* Examples.swift in Sources */,
 				7CBE8CAE206343800081D69A /* FFTLoader.swift in Sources */,
 				7CCFE75C206B5DF50017D2AD /* Morlet.swift in Sources */,
 				7C5F7223205F70E9003DBE84 /* FFTSpectrumView.swift in Sources */,
@@ -283,7 +276,6 @@
 				7CCFE760206BEDDB0017D2AD /* MathUtils.swift in Sources */,
 				7CCFE75520636C5E0017D2AD /* FrequencyMeasure.swift in Sources */,
 				EF70092A1C3EDFB900E75ECF /* TempiAudioInput.swift in Sources */,
-				7CCFE7592064642E0017D2AD /* MicInputExtractor.swift in Sources */,
 				7C8826112077E131004B59E3 /* BeatingDetector.swift in Sources */,
 				7C5F7220205F45FC003DBE84 /* NoteIntervalCalculator.swift in Sources */,
 				EFAC3F481C45C719002CD63F /* TempiFFT.swift in Sources */,
